@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FingerprintJS Demo</title>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js"></script>
+</head>
+<body>
+  <h1>FingerprintJS Device Identifier Demo</h1>
+  <p>Check your browser's console for the unique device ID.</p>
+
+  <script>
+    window.onload = async function () {
+      if (typeof FingerprintJS !== 'undefined') {
+        try {
+          const fp = await FingerprintJS.load();
+
+          const result = await fp.get();
+
+          const deviceIdentifier = result.visitorId;
+          console.log('Unique Device ID:', deviceIdentifier);
+        } catch (error) {
+          console.error('Error generating device fingerprint:', error);
+        }
+      } else {
+        console.error('FingerprintJS is not loaded.');
+      }
+    };
+  </script>
+</body>
+</html>
